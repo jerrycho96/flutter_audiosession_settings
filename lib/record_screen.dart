@@ -1,5 +1,6 @@
 import 'dart:typed_data';
 
+import 'package:danso_function/danso_function.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_audio_capture/flutter_audio_capture.dart';
 import 'package:just_audio/just_audio.dart' as ja;
@@ -22,6 +23,7 @@ class _RecordScreenState extends State<RecordScreen> {
   final pitchDetectorDart = PitchDetector(44100, 2000);
   final pitchupDart = PitchHandler(InstrumentType.guitar);
   late AudioSession audioSessions;
+  late JungGanBoPlayer jungGanBoPlayer = JungGanBoPlayer();
 
   ja.AudioPlayer player = ja.AudioPlayer(
     handleInterruptions: false,
@@ -36,7 +38,6 @@ class _RecordScreenState extends State<RecordScreen> {
   @override
   void initState() {
     super.initState();
-
     // _audioSessionConfigure();
   }
 

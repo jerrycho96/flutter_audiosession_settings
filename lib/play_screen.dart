@@ -1,5 +1,6 @@
 import 'dart:typed_data';
 
+import 'package:danso_function/danso_function.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_midi/flutter_midi.dart';
@@ -16,6 +17,7 @@ class PlayScreen extends StatefulWidget {
 
 class _PlayScreenState extends State<PlayScreen> {
   final _flutterMidi = FlutterMidi();
+  JungGanBoPlayer jungGanBoPlayer = JungGanBoPlayer();
 
   ja.AudioPlayer player = ja.AudioPlayer(
     // handleInterruptions: false,
@@ -50,6 +52,28 @@ class _PlayScreenState extends State<PlayScreen> {
         child: Column(
           children: [
             const Spacer(),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ElevatedButton(
+                  child: const Text('정간보+장구 재생'),
+                  onPressed: () async {
+                    // _flutterMidi.playMidiNote(midi: 60);
+                    await player.setAsset('assets/semachi.wav');
+                    player.play();
+                    jungGanBoPlayer.play(JungGanBo('title', '4박장단',
+                        't|-h|m|h#t|t|t|o#h|h|h|o#t|t|t|o#t|-h|m|h#t|t|t|o#h|h|t|-h#m|o|o|^#'));
+                  },
+                ),
+                ElevatedButton(
+                  child: const Text('정간보+장구 정지'),
+                  onPressed: () {
+                    // _flutterMidi.stopMidiNote(midi: 60);
+                    allMidiStop();
+                  },
+                ),
+              ],
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
